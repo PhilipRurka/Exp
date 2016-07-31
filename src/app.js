@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express'),
-      posts = require('./mock/post.json');
+      posts = require('./mock/posts.json');
 
 var app = express();
 
@@ -9,8 +9,10 @@ app.get('/', function(req, res) {
    res.send('<h1>Hello World!</h1>');
 });
 
-app.get('/blogpost', function(req, res) {
-   res.send(posts);
+app.get('/blog/:title', function(req, res) {
+   var title = req.params.title;
+   var post = posts[title];
+   res.send(post);
 });
 
 app.listen(3000, function() {
